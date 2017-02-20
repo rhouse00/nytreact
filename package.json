@@ -1,0 +1,22 @@
+{
+  "name": "nyt react",
+  "version": "1.0.0",
+  "description": "NY Times News Scrubbing site",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack & node server",
+    "start": "node server",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhouse00/nytreact.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rhouse00/nytreact/issues"
+  },
+  "homepage": "https://github.com/rhouse00/nytreact#readme"
+}
