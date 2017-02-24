@@ -1,5 +1,5 @@
 {
-  "name": "nyt react",
+  "name": "nyt_react",
   "version": "1.0.0",
   "description": "NY Times News Scrubbing site",
   "main": "webpack.config.js",
@@ -13,8 +13,24 @@
     "type": "git",
     "url": "git+https://github.com/rhouse00/nytreact.git"
   },
-  "author": "",
+  "author": "Ryan House",
   "license": "ISC",
+  "dependencies": {
+    "axios": "^0.12.0",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.1",
+    "morgan": "^1.7.0",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8"
+  },
+  "devDependencies": {
+    "babel-core": "^6.3.13",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.3.13",
+    "webpack": "^1.13.1"
+  },
   "bugs": {
     "url": "https://github.com/rhouse00/nytreact/issues"
   },
