@@ -1,27 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Articles from './Articles'
-class Results extends React.Component {
 
-    _getArticles(){
-        const objectArray =[];
-        return objectArray.map((article) => {
-            return (
-                <Article title={article.title} date={article.date} key={article.id} />
-            )
-        })
+class ResultBox extends Component {
+    
+    constructor(props){
+        super(props);
     }
     
     render(){
+        var articleTitles = this.props.articleData.map( 
+            (item, index) =>{ return <Articles key={index} title={item.title} link={item.link} /> });
         return (
             <div className='panel panel-success'>
                 <div className='panel-heading'>
                     <h3 className='panel-title'>Top 5 Results</h3>
                 </div>
                 <div className='panel-body'>
-                    <div className='well'></div>
+                    {articleTitles}
                 </div>
             </div>
         ); // end of Return
     } // end of Render
+
 }; // end of Component
-export default Results;
+export default ResultBox;

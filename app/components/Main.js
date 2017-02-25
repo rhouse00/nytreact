@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Search from './Search';
 import ResultBox from './ResultBox';
 import Saved from './Saved';
 import helpers from './utils/helpers';
 
 
-class Main extends React.Component{
+class Main extends Component{
 
     constructor(props){
         super(props);
@@ -14,7 +14,7 @@ class Main extends React.Component{
             topic: '',
             startYear: '',
             endYear: '',
-            results: ''
+            results: []
         };
 
         this.setSearch = this.setSearch.bind(this);
@@ -22,15 +22,16 @@ class Main extends React.Component{
 
     componentDidUpdate(prevProps, prevState){
         if(prevState.topic !== this.state.topic || prevState.startYear !== this.state.startYear || prevState.endYear !== this.state.endYear) {
+           
             helpers.runQuery(this.state.topic, this.state.startYear, this.state.endYear).then( (data) =>{
                 if(data !== this.state.results){
                     console.log(data);
+                    
                     this.setState({results: data});
                 } //End of second IF
             }); // End of Helpers
+            
         } // End of first IF
-
-
     } // End of componentUpdate
 
     setSearch(term, start, end){
