@@ -27,8 +27,10 @@ app.use(express.static('./public'));
 
 app.use(allowCrossDomain);
 
-mongoose.connect('mongodb://localhost/');
-
+// development
+// mongoose.connect('mongodb://localhost/nyt');
+// production
+mongoose.connect("mongodb://heroku_4jcgb9s3:21gqph78dr3kh740l3tn6je7lm@ds161169.mlab.com:61169/heroku_4jcgb9s3");
 db.on('error', (err) =>{
     console.log('Mongoose Error: ' + err );
 });
