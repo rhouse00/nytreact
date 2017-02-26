@@ -12,16 +12,14 @@ class Search extends React.Component {
     }
 
     _handleChange(event){
-        var newState = {};
+        let newState = {};
         newState[event.target.id] = event.target.value;
         this.setState(newState);
     }
 
     _handleSubmit(event){
         event.preventDefault();
-        console.log("CLICK");
         this.props.setSearch(this.state.topic, this.state.startYear, this.state.endYear);
-        console.log(this.state.topic);
         this.setState({ 
             topic: '',
             startYear: '',

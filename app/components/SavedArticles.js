@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
-class Article extends Component{
+class SavedArticle extends Component{
+
+    constructor(props){
+        super(props);
+    }
 
     render(){
         return (
@@ -11,7 +15,7 @@ class Article extends Component{
                     </div>
                 </div>
                 <div className='col-md-2'>
-                    <button onClick={this.props._handleSaveBtn} data-link={this.props.link} data-title={this.props.title} type='submit'>Save Article</button>
+                    <button onClick={this.props._handleDeleteBtn} data-link={this.props.link} data-title={this.props.title} type='submit'>Remove</button>
                 </div>
             </div>
         ); // end of Return
@@ -19,4 +23,4 @@ class Article extends Component{
 
 }; //end of Component
 
-export default Article;
+export default SavedArticle;

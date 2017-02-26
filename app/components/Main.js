@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Search from './Search';
 import ResultBox from './ResultBox';
-import Saved from './Saved';
+import SaveBox from './SaveBox';
 import helpers from './utils/helpers';
 
 
@@ -14,25 +14,54 @@ class Main extends Component{
             topic: '',
             startYear: '',
             endYear: '',
-            results: []
+            results: [],
+            saved: []
         };
 
         this.setSearch = this.setSearch.bind(this);
+        this.updateSaved = this.updateSaved.bind(this);
+        this.addSaved = this.addSaved.bind(this);
+        this._handleSaveBtn = this._handleSaveBtn.bind(this);
+        this._handleDeleteBtn = this._handleDeleteBtn.bind(this);
     }
-
+    componentDidMount(){
+        helpers.getArticles().then( (saved) => {
+                let newArray = this.state.saved.slice();
+                newArray = saved.data;
+                this.setState({ saved: newArray });
+            });
+        
+    }
     componentDidUpdate(prevProps, prevState){
         if(prevState.topic !== this.state.topic || prevState.startYear !== this.state.startYear || prevState.endYear !== this.state.endYear) {
-           
             helpers.runQuery(this.state.topic, this.state.startYear, this.state.endYear).then( (data) =>{
                 if(data !== this.state.results){
-                    console.log(data);
-                    
                     this.setState({results: data});
                 } //End of second IF
             }); // End of Helpers
-            
         } // End of first IF
+
+        if(prevState.saved.length !== this.state.saved.length){
+            helpers.getArticles().then( (saved) => {
+                if(saved.data !== this.state.saved){
+                    let newArray = this.state.saved.slice();
+                    newArray = saved.data;
+                    this.setState({ saved: newArray });
+                }
+            });
+        }
     } // End of componentUpdate
+    updateSaved(object){
+        let array = this.state.saved;
+        let index = array.findIndex(x => x.title == object.title);
+        array.splice(index, 1);
+        this.setState({saved: array});
+    }
+    addSaved(object){
+        let array = this.state.saved;
+        array.push(object);
+        this.setState({saved: array});
+    }
 
     setSearch(term, start, end){
         this.setState({
@@ -41,6 +70,26 @@ class Main extends Component{
             endYear: end
         });
     }
+    _handleSaveBtn (event) {
+        event.preventDefault();
+        let object = {
+            title: event.target.getAttribute('data-title'),
+            link: event.target.getAttribute('data-link')
+        }
+        helpers.saveArticle(object);
+        this.addSaved(object);
+    }
+
+    _handleDeleteBtn (event){
+        event.preventDefault();;
+        let object = {
+            title: event.target.getAttribute('data-title'),
+            link: event.target.getAttribute('data-link')
+        }
+        this.updateSaved(object);
+        helpers.deleteArticle(object);
+    }
+    
 
     render(){
         return (
@@ -58,12 +107,12 @@ class Main extends Component{
                 </div>
                 <div className='row'>
                     <div className='col-md-12'>
-                        <ResultBox articleData={this.state.results} />
+                        <ResultBox articleData={this.state.results} _handleSaveBtn={this._handleSaveBtn} />
                     </div>
                 </div>
                 <div className='row'>
                     <div className='col-md-12'>
-                        <Saved />
+                        <SaveBox savedArticles={this.state.saved} _handleDeleteBtn={this._handleDeleteBtn} />
                     </div>  
                 </div>
             </div>
