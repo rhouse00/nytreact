@@ -81,7 +81,7 @@ class Main extends Component{
     }
 
     _handleDeleteBtn (event){
-        event.preventDefault();;
+        event.preventDefault();
         let object = {
             title: event.target.getAttribute('data-title'),
             link: event.target.getAttribute('data-link')
