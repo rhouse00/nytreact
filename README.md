@@ -16,6 +16,4 @@ NYT Article Scraper uses the NYT API to populate articles on a webpage according
 
 * Mongoose
 * Bootstrap
-* HTML5
-* CSS3
 * NYT API
